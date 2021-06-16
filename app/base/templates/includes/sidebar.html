@@ -1,0 +1,92 @@
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">			
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+
+					{% if current_user.is_authenticated %}
+						<div class="user">
+							<div class="avatar-sm float-left mr-2">
+								<img src="/static/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							</div>
+							<div class="info">
+								<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+									<span>
+										{{ current_user.username }}
+										<span class="user-level">{{ current_user.email }} </span>
+										<span class="caret"></span>
+									</span>
+								</a>
+								<div class="clearfix"></div>
+
+								<div class="collapse in" id="collapseExample">
+									<ul class="nav">
+										<li>
+											<a href="#profile">
+												<span class="link-collapse">My Profile</span>
+											</a>
+										</li>
+										<li>
+											<a href="{{ url_for('base_blueprint.logout') }}" >
+												<span class="link-collapse">Logout</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<ul class="nav nav-primary">
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Menu</h4>
+							</li>
+							<li class="nav-item {% if 'index' in segment %} active {% endif %}">
+								<a href="/index.html">
+									<i class="fas fa-home"></i>
+									<p>Dashboard</p>
+								</a>
+							</li>
+							<li class="nav-item {% if 'bolsas' in request.url  %} active {% endif %}">
+								<a href="/bolsas">
+									<i class="fas fa-graduation-cap"></i>
+									<p>Bolsas</p>
+								</a>
+							</li>
+							<li class="nav-item {% if 'allwinners' in request.url  %} active {% endif %}">
+								<a href="/allwinners">
+									<i class="fas fa-trophy"></i>
+									<p>Ganhadores</p>
+								</a>
+							</li>
+							<li class="nav-item {% if '/manage_scholarship' in request.url  %} active {% endif %}">
+								<a href="/widgets.html">
+									<i class="fas fa-cogs"></i>
+									<p>Gerenciar Bolsas</p>
+								</a>
+							</li>
+							<li class="nav-item {% if 'newscholarship' in request.url  %} active {% endif %}">
+								<a href="/widgets.html">
+									<i class="fas fa-graduation-cap"></i>
+									<p>Nova Bolsa</p>
+								</a>
+							</li>
+							<li class="nav-item {% if 'widgets' in request.url  %} active {% endif %}">
+								<a href="/widgets.html">
+									<i class="fas fa-hands-helping"></i>
+									<p>Gerenciar Parceiros</p>
+								</a>
+							</li>
+							<li class="nav-item {% if 'members' in request.url  %} active {% endif %}">
+								<a href="/members">
+									<i class="fas fa-users"></i>
+									<p>Membros</p>
+								</a>
+							</li>
+						</ul>								
+					{% endif %}	
+				</div>
+			</div>
+		</div>
+        <!-- End Sidebar -->
+        

@@ -1,0 +1,203 @@
+{% extends "layouts/base_without_sidebar.html" %}
+
+{% block title %} UI Datatables {% endblock %} 
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<title>My Application</title>
+
+<form action=""  method="POST">
+<title>My Application</title>
+ 
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Cadastro</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Bolsas</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Ganhadores</a>
+					</li>
+				</ul>
+			</div>
+			<div>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+    {% for category, message in messages %}
+ 	<div notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">
+	<button type="button" aria-hidden="true" class="close" notify="dismiss">×</button>
+	<span notify="icon"></span>
+	<span notify="title">Ops..</span>
+	<span notify="message">{{ message }}</span>
+	<a href="{3}" target="{4}" data-notify="url"></a>
+</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" >
+						<div class="col-md-5 col-lg-5">	
+									<div class="form-group">
+										<label for="email2">Oi, pretUX! Qual é o seu nome ou como você prefere que a gente te chame?</label>
+										{{ form.name( class='form-control', type="text") }}
+										<small id="emailHelp2" class="form-text text-muted">Obs.: É importante preencher com o nome que usa no Telegram e no Linkedin.</small>
+									</div>
+									<div class="form-group">
+										<label for="email2">Qual o seu CPF?</label>
+										{{ form.cpf( class='form-control', type="text") }}
+										<small id="emailHelp2" class="form-text text-muted"> Obs.:Precisamos dessa informação, pois esse dado é utilizado para você ter acesso ao nosso sistema.</small>
+										{% for error in form.cpf.errors %}
+										<span style="color: red;">{{ error }}</span>
+										{% endfor %}
+									</div>
+									<div class="form-group">
+										<label for="email2">Qual o seu Celular?</label>
+										{{ form.phone( class='form-control', type="text") }}
+										<small id="emailHelp2" class="form-text text-muted">Obs.: O mesmo que vc usa no Telegram</small>
+										{% for error in form.phone.errors %}
+										<span style="color: red;">{{ error }}</span>
+										{% endfor %}
+									</div>
+									<div class="form-group">
+										<label for="email2">Qual o seu E-mail?</label>
+										{{ form.email( class='form-control', type="text") }}
+										<small id="emailHelp2" class="form-text text-muted">Obs.: Não iremos te enviar spams.</small>
+										{% for error in form.email.errors %}
+										<span style="color: red;">{{ error }}</span>
+										{% endfor %}
+									</div>
+									<div class="form-group">
+										<label for="basic-url">Qual o link do seu LinkedIn?</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon3">https://www.linkedin.com/in/</span>
+											</div>
+											{{ form.linkedin( class='form-control', type="text", id="basic-url") }}
+										</div>
+										{% for error in form.linkedin.errors %}
+										<span style="color: red;">{{ error }}</span>
+										{% endfor %}
+									</div>
+									<div class="form-group">
+										<label for="email2">Qual o seu Facebook?</label>
+										{{ form.facebook( class='form-control', type="text") }}
+										<small id="emailHelp2" class="form-text text-muted">Obs.: Não iremos te enviar spams.</small>
+										{% for error in form.facebook.errors %}
+										<span style="color: red;">{{ error }}</span>
+										{% endfor %}
+									</div>
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1">@</span>
+											</div>
+											{{ form.instagram( class='form-control', type="text", ) }}
+										</div>
+									<div class="form-check">
+										<label>Usamos o Telegram como canal de comunicação. 
+										<br>Você já utiliza o Telegram ou aceitaria baixá-lo para ter acesso a nossa comunidade?</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="optionsRadios" value=""  checked="">
+											<span class="form-radio-sign">Sim, já utilizando o Telegram.</span></br>
+											<input class="form-radio-input" type="radio" name="optionsRadios" value="">
+											<span class="form-radio-sign">Não, mas estou disposto a baixá-lo para ter acesso à comunidade. </span></br>
+											<input class="form-radio-input" type="radio" name="optionsRadios" value="">
+											<span class="form-radio-sign"> Não utilizo e nem pretendo baixá-lo. </span></br>
+											<input class="form-radio-input" type="radio" name="optionsRadios" value="">
+											<span class="form-radio-sign">Se a comunidade estivesse no WhatsApp, seria melhor para mim.</span>
+										</label>
+									</div>
+							</div>
+							</div>
+						</div>
+						<div class="card-action">
+							<button class="btn btn-dark pull-right" type="submit">Proximo</button>
+						</div>
+							<div class="table-responsive">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+	
+
+{% endblock javascripts %}

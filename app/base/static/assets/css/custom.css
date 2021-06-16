@@ -1,0 +1,13 @@
+.radio-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+}
+
+.radio-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 50;
+    padding: 5px 0;
+}

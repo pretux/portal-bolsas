@@ -1,0 +1,110 @@
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+							<!-- Modal -->
+	<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+  		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+										<div class="modal-header no-bd">
+											<h5 class="modal-title">
+												<span class="fw-mediumbold">
+												Gerenciar</span> 
+												<span class="fw-light">
+													Pendencias
+												</span>
+											</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form action="/update_pendence">
+												<div class="row">
+											     	<div class="form-check">
+										               <label class="form-check-label">
+											           <input class="form-check-input" type="checkbox" value="">
+											           <span class="form-check-sign">Participou do curso?</span>
+                  									</label>
+				            					   </div>
+												   	<div class="form-check">
+										               <label class="form-check-label">
+											           <input class="form-check-input" type="checkbox" value="">
+											           <span class="form-check-sign">Entregou o artigo?</span>
+                  									</label>
+				            					   </div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Link do artigo do Medium</label>
+															<input id="addName" type="text" class="form-control" placeholder="">
+														</div>
+													</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer no-bd">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+											<button type="button" id="addRowButton" class="btn btn-primary">Atualizar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

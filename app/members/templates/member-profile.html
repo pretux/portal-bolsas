@@ -1,0 +1,126 @@
+{% extends "layouts/base.html" %}
+
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+                
+<div class="content">
+   <div class="page-inner">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+         <div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-12 col-xl-8">
+            {% for  pendency in members_pendency %}
+            <div class="card card-body bg-white border-light shadow-sm mb-4">
+               <h1 class="h5 mb-4">Status:&nbsp;  {{ pendency.status_pendency }}</h1>
+               <div class="card-list">
+                  <div class="item-list">
+                     <form action=""  method="POST">
+                     <div class="info-user ml-3">
+                        <div>Curso: Curso de UX</div>
+                        {% if pendency.status_pendency == "Pendente" %}
+                        <div class="status">Solicitar a aprovação de um artigo </div>
+                        <br>
+                        <label for="urlencode">URL:</label>
+                        {{ form.article_link( class='form-control', type="text") }}
+                        <button type="submit" class="btn btn-outline-dark">Enviar</button>
+                        {% else %}
+                        <div class="status">Solicitação enviada, aguarde um retorno da comunidade!! </div>
+                        <br>
+                        <label for="urlencode">URL:  <a href="{{ pendency.article_link }}"   target="_blank" class="stretched-link">{{ pendency.article_link }}</a></label>
+                        {% endif %}
+                        
+                     </div>
+                     </form>
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Solicitações</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <div class="status">{{ pendency.name }} Solicitou a aprovação de uma artigo </div>
+                              <br>
+                              <div class="status">Link do artigo: <a href="{{ pendency.article_link }}"   target="_blank" class="stretched-link">Acessar</a>
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Reprovar</button>
+                              <button type="button" class="btn btn-dark">Aprovar</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+            <div class="card card-body bg-white border-light shadow-sm mb-4">
+               <h2 class="h5 mb-4">Atividades</h2>
+            </div>
+         </div>
+         <div class="col-12 col-xl-4">
+            <div class="row">
+               <div class="col-12 mb-4">
+                  <div class="card border-light text-center p-0">
+                     <div class="card-body pb-5">
+                        <img src="/static/assets/img/profile.jpg" class="avatar float-left  rounded-circle" alt="Neil Portrait">
+                        <br>
+                        <h4 class="h3">
+                           {{ current_user.username }}
+                        </h4>
+                        <h5 class="font-weight-normal">
+                           {{ current_user.email }}
+                        </h5>
+                        <p class="text-gray mb-4">New York, USA</p>
+                        <div class="social-media">
+                           <a class="btn btn-info btn-twitter btn-sm btn-link" href="#"> 
+                           <span class="btn-label just-icon"><i class="flaticon-linkedin"></i> </span>
+                           </a>
+                           <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#"> 
+                           <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span> 
+                           </a>
+                           <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#"> 
+                           <span class="btn-label just-icon"><i class="flaticon-instagram"></i> </span> 
+                           </a>
+                        </div>
+                        <div class="">
+                           <div class="form-group">
+                              <label for="email">Email</label>
+                              <input class="form-control" id="email" type="email" placeholder="name@company.com" required>
+                           </div>
+                        </div>
+                        <div class="">
+                           <div class="form-group">
+                              <label for="email">Celular</label>
+                              <input class="form-control" id="email" type="email" placeholder="name@company.com" required>
+                           </div>
+                        </div>
+                        <div class="">
+                           <div class="form-group">
+                              <label for="email">CPF</label>
+                              <input class="form-control" id="email" type="email" placeholder="name@company.com" required>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+
